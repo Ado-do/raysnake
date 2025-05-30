@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -std=c17
+CFLAGS = -Wall -Wextra -ggdb -std=c17
 
 ifeq ($(OS), Windows_NT)
 	LD_LIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
