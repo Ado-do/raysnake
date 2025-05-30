@@ -59,6 +59,8 @@ Vector2 GetRandomFoodPosition(Snake *s, int grid_width, int grid_height)
     bool is_valid = false;
     while (!is_valid) {
         pos = (Vector2){GetRandomValue(0, grid_width - 1), GetRandomValue(0, grid_height - 1)};
+        if ((pos.x == g.food_pos.x) && (pos.y == g.food_pos.y)) continue;
+
         for (int i = 0; i < s->curr_length; i++) {
             if ((pos.x != s->pos[i].x) && (pos.y != s->pos[i].y)) {
                 is_valid = true;
@@ -137,12 +139,6 @@ void UpdateSnake(Snake *s)
             return;
         }
     }
-
-    // Check food collision
-    if ((s->head_pos->x == g.food_pos.x) && (s->head_pos->y == g.food_pos.y)) {
-        s->is_growing = true;
-        g.food_pos = GetRandomFoodPosition(s, g.grid_width, g.grid_height);
-    }
 }
 
 void UpdateTitle(int key)
@@ -183,6 +179,12 @@ void UpdateGameplay(int key)
     if (s->movement_timer >= 1 / snake_vel) {
         UpdateSnake(s);
         s->movement_timer = 0.0f;
+    }
+
+    // Check food collision
+    if ((s->head_pos->x == g.food_pos.x) && (s->head_pos->y == g.food_pos.y)) {
+        s->is_growing = true;
+        g.food_pos = GetRandomFoodPosition(s, g.grid_width, g.grid_height);
     }
 }
 
@@ -249,10 +251,11 @@ void DrawGameplay()
 
     // Snake
     Snake *s = &g.snake;
-    DrawRectangle(s->head_pos->x * cell_size + grid_offset.x, s->head_pos->y * cell_size + grid_offset.y, cell_size,
-                  cell_size, BLUE);
     for (int i = 1; i < s->curr_length; i++)
         DrawRectangle(s->pos[i].x * cell_size + grid_offset.x, s->pos[i].y * cell_size + grid_offset.y, cell_size, cell_size, SKYBLUE);
+
+    DrawRectangle(s->head_pos->x * cell_size + grid_offset.x, s->head_pos->y * cell_size + grid_offset.y, cell_size,
+                  cell_size, BLUE);
 
     // Food
     DrawRectangle(g.food_pos.x * cell_size + grid_offset.x + food_offset, g.food_pos.y * cell_size + grid_offset.y + food_offset,
