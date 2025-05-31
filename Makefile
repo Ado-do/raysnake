@@ -17,10 +17,10 @@ GAME = build/raysnake
 all: $(GAME)
 
 $(GAME): $(OBJ)
-	@mkdir -p build/
 	$(CC) -o $@ $^ $(LD_LIBS)
 
 build/%.o: src/%.c
+	@mkdir -p build/
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: $(GAME)

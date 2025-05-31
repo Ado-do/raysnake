@@ -33,7 +33,7 @@ static const int window_width = 1280;
 static const int window_height = 720;
 static const char *game_name = "raysnake";
 static const float cell_size = ((window_width > window_height) ? window_height : window_width) * 0.125f;
-static const float snake_vel = 6;
+static const float snake_vel = 8;
 
 static Game game;
 
@@ -275,11 +275,11 @@ void DrawGameplay()
     // Grid
     for (int i = 1; i < game.grid_width; i++) {
         DrawLineEx((Vector2){grid_offset.x + i * cell_size, grid_offset.y},
-                   (Vector2){grid_offset.x + i * cell_size, grid_offset.y + cell_size * game.grid_height}, 2, GRAY);
+                   (Vector2){grid_offset.x + i * cell_size, grid_offset.y + cell_size * game.grid_height}, 2, DARKGRAY);
     }
     for (int i = 1; i < game.grid_height; i++) {
         DrawLineEx((Vector2){grid_offset.x, grid_offset.y + i * cell_size},
-                   (Vector2){grid_offset.x + cell_size * game.grid_width, grid_offset.y + i * cell_size}, 2, GRAY);
+                   (Vector2){grid_offset.x + cell_size * game.grid_width, grid_offset.y + i * cell_size}, 2, DARKGRAY);
     }
 
     // Snake
@@ -301,7 +301,7 @@ void DrawGameplay()
                   food_size, food_size, GREEN);
 
     // Grid border
-    DrawRectangleLinesEx((Rectangle){grid_offset.x, grid_offset.y, game.grid_width * cell_size, game.grid_height * cell_size}, 4, WHITE);
+    DrawRectangleLinesEx((Rectangle){grid_offset.x, grid_offset.y, game.grid_width * cell_size, game.grid_height * cell_size}, 4, LIGHTGRAY);
 }
 
 void DrawGameOver()
