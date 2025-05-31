@@ -3,12 +3,10 @@
 int main()
 {
     InitGame();
-
     while (IsGameRunning()) {
         UpdateGame();
         DrawGame();
     }
-
     CloseGame();
     return 0;
 }
