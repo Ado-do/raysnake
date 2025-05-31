@@ -1,6 +1,6 @@
 # raysnake: a simple raylib snake clone
 
-![preview gif](https://i.imgur.com/N6mnhc3.gif)
+![preview gif](https://i.imgur.com/nHzL8bb.gif)
 
 ## Compilation
 
