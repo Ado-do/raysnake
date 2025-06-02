@@ -1,11 +1,11 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -ggdb -std=c17
 
+LD_LIBS = -lraylib
 ifeq ($(OS), Windows_NT)
-	LD_LIBS = -lraylib -lopengl32 -lgdi32 -lwinmm
+	LD_LIBS += -lopengl32 -lgdi32 -lwinmm
 else
-	CFLAGS += $(shell pkg-config --cflags raylib)
-	LD_LIBS = $(shell pkg-config --libs raylib)
+	LD_LIBS += -lm
 endif
 
 SRC = $(wildcard src/*)
